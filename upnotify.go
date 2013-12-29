@@ -15,6 +15,8 @@ type PushoverMessage struct {
   Message string `json:"message"`
 }
 
+//Loads a json encoded config from upnotify.conf
+//For an example see file upnotify.conf.example
 func LoadConfig() (PushoverMessage, error){
   var msg PushoverMessage
   
@@ -37,6 +39,9 @@ func main() {
     return
   }
 
+  //Pushover do not accept plain json encoding. It has to be either
+  //http Form of percent encoded format. This is not indicated in the
+  //api docs, but in a blog post. Looks to be a result of a rails vuln.
   http.PostForm("http://api.pushover.net/1/messages.json",
                 url.Values{"token": {msg.Token},
                            "user":    {msg.User},
