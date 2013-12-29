@@ -1,3 +1,7 @@
+//Upnotify.go
+//
+//A simple app for sending a push notification via pushover.net
+
 package main
 
 import "net/url"
